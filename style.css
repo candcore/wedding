@@ -1,639 +1,589 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --black: #0a0a0a;
-    --white: #fafaf8;
-    --cream: #f5f2ed;
-    --accent: #8b0000;
-    --gold: #c8a96e;
-    --gray: #888;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    background: var(--white);
-    color: var(--black);
-    overflow-x: hidden;
-  }
-
-  
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.9s ease, transform 0.9s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal-delay-1 { transition-delay: 0.15s; }
-  .reveal-delay-2 { transition-delay: 0.3s; }
-  .reveal-delay-3 { transition-delay: 0.45s; }
-  .reveal-delay-4 { transition-delay: 0.6s; }
-
- 
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    background: var(--black);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    overflow: hidden;
-    padding-bottom: 60px;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.85) 100%);
-    z-index: 1;
-  }
-
-  
-  .hero-photo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    filter: grayscale(100%);
-    z-index: 0;
-  }
-
-  .hero-photo-placeholder {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(160deg, #1a1a1a 0%, #2d2d2d 50%, #111 100%);
-    z-index: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hero-badge {
-    position: absolute;
-    top: 28px;
-    left: 28px;
-    z-index: 3;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    color: rgba(255,255,255,0.6);
-    text-transform: uppercase;
-  }
-
-  .hero-save {
-    position: absolute;
-    top: 28px;
-    left: 28px;
-    z-index: 3;
-    color: white;
-    font-size: clamp(28px, 8vw, 42px);
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    line-height: 1;
-  }
-
-  .hero-save em {
-    font-family: 'Great Vibes', cursive;
-    font-size: 0.7em;
-    font-style: normal;
-    display: block;
-    margin-left: -4px;
-    margin-top: -6px;
-    opacity: 0.85;
-  }
-
-  .hero-save-date {
-    position: absolute;
-    top: 80px;
-    right: 28px;
-    z-index: 3;
-    color: white;
-    font-size: clamp(22px, 6vw, 36px);
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 3;
-    text-align: center;
-    color: white;
-    padding: 0 24px;
-  }
-
-  .hero-date {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(22px, 5vw, 30px);
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-  }
-
-  .hero-names {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(52px, 14vw, 82px);
-    line-height: 1.05;
-    font-weight: 400;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
-  }
-
-  .hero-names .ampersand {
-    font-size: 0.65em;
-    opacity: 0.9;
-    display: inline-block;
-    margin: 0 8px;
-  }
-
-  .chevrons {
-    position: absolute;
-    bottom: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    animation: bounce 1.8s infinite ease-in-out;
-  }
-  .chevrons svg {
-    width: 24px;
-    height: 14px;
-    fill: none;
-    stroke: rgba(255,255,255,0.7);
-    stroke-width: 2;
-  }
-  @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(7px); }
-  }
-
-  
-.music-bar {
-    background: var(--cream);
-    padding: 18px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-  .music-btn {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 2px solid var(--black);
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    position: relative;
-    flex-shrink: 0;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .music-btn:hover { background: var(--black); }
-  .music-btn:hover svg { stroke: white; fill: white; }
-  .music-btn svg { width: 18px; height: 18px; fill: var(--black); stroke: none; }
 
-  .music-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #aaa;
-    font-weight: 600;
+:root {
+  --black: #0c0c0c;
+  --white: #fffefb;
+  --cream: #f4f0e9;
+  --gold: #b89a68;
+  --dark-gold: #81673f;
+  --gray: #777;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(38px);
+  transition: opacity .9s ease, transform .9s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 110px 22px 82px;
+  overflow: hidden;
+  background: #111;
+}
+
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(100%);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.16), rgba(0,0,0,.28) 45%, rgba(0,0,0,.84));
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(255,255,255,.42);
+  pointer-events: none;
+}
+
+.save-date {
+  position: absolute;
+  top: 34px;
+  left: 30px;
+  z-index: 2;
+  color: #fff;
+  font-size: clamp(22px, 6vw, 34px);
+  line-height: .8;
+  letter-spacing: .14em;
+  font-weight: 500;
+}
+
+.save-date span {
+  display: block;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.05em;
+  letter-spacing: 0;
+  margin: 8px 0 7px 14px;
+}
+
+.top-date {
+  position: absolute;
+  top: 38px;
+  right: 30px;
+  z-index: 2;
+  color: #fff;
+  font-size: clamp(16px, 4vw, 22px);
+  letter-spacing: .12em;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 4px 25px rgba(0,0,0,.45);
+}
+
+.hero-small {
+  font-size: 14px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(58px, 16vw, 104px);
+  line-height: .95;
+  font-weight: 400;
+}
+
+.hero h1 span {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .45em;
+  margin: 0 7px;
+}
+
+.hero-date {
+  margin-top: 18px;
+  font-size: clamp(18px, 4.5vw, 25px);
+  letter-spacing: .09em;
+}
+
+.scroll-down {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  z-index: 3;
+  transform: translateX(-50%);
+  width: 35px;
+  height: 28px;
+  animation: bounce 1.8s infinite;
+}
+
+.scroll-down span {
+  position: absolute;
+  left: 6px;
+  width: 22px;
+  height: 22px;
+  border-right: 2px solid rgba(255,255,255,.8);
+  border-bottom: 2px solid rgba(255,255,255,.8);
+  transform: rotate(45deg);
+}
+
+.scroll-down span:last-child {
+  top: 8px;
+  opacity: .55;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(7px); }
+}
+
+.music-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--cream);
+  border-bottom: 1px solid rgba(0,0,0,.07);
+}
+
+.music-btn {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  border-radius: 50%;
+  border: 1.5px solid var(--black);
+  background: var(--white);
+  color: var(--black);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.music-ring {
+  position: absolute;
+  inset: -6px;
+  border: 1px dashed rgba(0,0,0,.25);
+  border-radius: 50%;
+  animation: spin 7s linear infinite paused;
+}
+
+.music-btn.playing .music-ring {
+  animation-play-state: running;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.music-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.music-subtitle {
+  margin-top: 3px;
+  font-size: 12px;
+  letter-spacing: .14em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.section {
+  padding: 68px 22px;
+}
+
+.invite {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--dark-gold);
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.invite h2,
+.event-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 7vw, 44px);
+  line-height: 1.25;
+}
+
+.invite-text {
+  max-width: 570px;
+  margin: 24px auto 0;
+  font-size: clamp(19px, 4.8vw, 23px);
+  line-height: 1.75;
+  color: #363636;
+}
+
+.script-text {
+  margin-top: 26px;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(34px, 9vw, 50px);
+  color: var(--dark-gold);
+}
+
+.photo-section {
+  padding: 5px 20px 72px;
+}
+
+.photo-frame {
+  max-width: 510px;
+  margin: 0 auto;
+  padding: 11px;
+  border: 1px solid rgba(0,0,0,.22);
+  background: #fff;
+  box-shadow: 0 22px 55px rgba(0,0,0,.12);
+}
+
+.photo-frame img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.calendar-section {
+  background: var(--cream);
+  text-align: center;
+}
+
+.month-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(58px, 15vw, 88px);
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+
+.calendar {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.calendar th {
+  padding: 8px 3px 15px;
+  color: var(--gray);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+
+.calendar td {
+  position: relative;
+  padding: 12px 4px;
+  font-size: 19px;
+}
+
+.wedding-day span {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  color: #fff;
+}
+
+.wedding-day::before {
+  content: '♥';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -51%);
+  font-size: 53px;
+  color: #8b0000;
+}
+
+.event-section {
+  background: var(--white);
+}
+
+.event-card {
+  max-width: 590px;
+  margin: 0 auto;
+  padding: 42px 24px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,.5);
+}
+
+.event-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.event-line {
+  width: 70px;
+  height: 1px;
+  margin: 23px auto;
+  background: rgba(0,0,0,.28);
+}
+
+.city {
+  font-size: 22px;
+  letter-spacing: .04em;
+}
+
+.restaurant {
+  margin-top: 8px;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(35px, 9vw, 50px);
+  color: var(--dark-gold);
+}
+
+.event-links {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  margin-top: 30px;
+}
+
+.event-links a {
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.link-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  margin-bottom: 9px;
+  overflow: hidden;
+}
+
+.map-icon {
+  color: #fff;
+  background: #27a943;
+  font-size: 29px;
+}
+
+.instagram-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-links strong {
+  font-size: 14px;
+  letter-spacing: .08em;
+}
+
+.event-links small {
+  margin-top: 3px;
+  color: var(--gray);
+  font-size: 11px;
+}
+
+.countdown-section {
+  padding: 62px 18px;
+  background: var(--black);
+  color: #fff;
+  text-align: center;
+}
+
+.countdown-title {
+  margin-bottom: 28px;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(17px, 4vw, 23px);
+  letter-spacing: .18em;
+}
+
+.countdown-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.countdown-item {
+  min-width: 74px;
+}
+
+.countdown-number {
+  padding: 13px 9px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.08);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(27px, 7vw, 42px);
+  font-weight: 600;
+}
+
+.countdown-item span {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.65);
+}
+
+.final-photo {
+  position: relative;
+  min-height: 620px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 45px 20px;
+  overflow: hidden;
+  background: #111;
+}
+
+.final-photo > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.final-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.06), rgba(0,0,0,.72));
+}
+
+.final-text {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 4px 22px rgba(0,0,0,.4);
+}
+
+.final-text p {
+  font-size: clamp(18px, 4.5vw, 23px);
+  letter-spacing: .05em;
+}
+
+.final-text h2 {
+  margin-top: 9px;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(57px, 15vw, 90px);
+  font-weight: 400;
+}
+
+.footer {
+  padding: 58px 20px 42px;
+  text-align: center;
+  background: var(--cream);
+}
+
+.footer > p {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .24em;
+  color: var(--dark-gold);
+}
+
+.footer h2 {
+  margin-top: 12px;
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(48px, 13vw, 73px);
+  font-weight: 400;
+}
+
+.footer h2 span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .52em;
+}
+
+.footer-heart {
+  margin: 4px 0 8px;
+  font-size: 27px;
+}
+
+.footer small {
+  letter-spacing: .18em;
+  color: var(--gray);
+}
+
+@media (min-width: 900px) {
+  .hero-photo {
+    object-position: center 25%;
   }
 
-  .music-spin {
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 1px dashed rgba(0,0,0,0.2);
-    animation: spin 8s linear infinite paused;
+  .final-photo {
+    min-height: 760px;
   }
-  .music-btn.playing .music-spin { animation-play-state: running; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+}
 
-
-  .section {
-    padding: 56px 24px;
-    background: var(--white);
+@media (max-width: 480px) {
+  .hero {
+    padding-bottom: 74px;
   }
 
-  .section-dark {
-    background: var(--black);
-    color: white;
-    padding: 56px 24px;
+  .save-date {
+    left: 24px;
   }
 
-  .month-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(54px, 14vw, 80px);
-    text-align: center;
-    margin-bottom: 28px;
-    line-height: 1;
-    color: var(--black);
+  .top-date {
+    right: 24px;
   }
 
-  .calendar {
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
-    border-collapse: collapse;
-  }
-  .calendar th {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    font-weight: 400;
-    color: var(--gray);
-    padding: 4px 0 12px;
-    text-align: center;
-    width: 14.28%;
-  }
-  .calendar td {
-    text-align: center;
-    padding: 10px 4px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-weight: 400;
-    color: var(--black);
-    cursor: default;
-  }
-  .calendar td.wedding-day {
-    position: relative;
-    font-weight: 600;
-    color: var(--black);
-  }
-  .calendar td.wedding-day::before {
-    content: '♥';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 44px;
-    color: var(--accent);
-    opacity: 0.22;
-    z-index: 0;
-    line-height: 1;
-  }
-  .calendar td.wedding-day span {
-    position: relative;
-    z-index: 1;
-  }
-
-
-  .greeting {
-    padding: 48px 28px 56px;
-    background: var(--white);
-    border-top: 1px solid rgba(0,0,0,0.07);
-  }
-  .greeting h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(18px, 5vw, 24px);
-    font-weight: 700;
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 22px;
-
-  }
-  .greeting p {
-    font-size: clamp(16px, 4vw, 19px);
-    line-height: 1.85;
-    text-align: center;
-    color: #222;
-    margin-bottom: 12px;
-  }
-  .greeting .script-line {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(24px, 6vw, 32px);
-    text-align: center;
-    margin-top: 18px;
-    color: var(--black);
-  }
-
-  
-  .event-card {
-    margin: 0 20px 40px;
-    border: 1.5px solid var(--black);
-    border-radius: 4px;
-    padding: 32px 24px;
-    text-align: center;
-    background: white;
-  }
-  .event-icon { font-size: 32px; margin-bottom: 12px; }
-  .event-datetime {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(18px, 5vw, 24px);
-    font-weight: 400;
-    margin-bottom: 6px;
-  }
-  .event-address-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gray);
-    margin-bottom: 10px;
-    margin-top: 14px;
-  }
-  .event-address {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(16px, 4vw, 20px);
-    line-height: 1.5;
-    font-weight: 400;
-    margin-bottom: 6px;
-  }
-  .event-restaurant {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(15px, 4vw, 19px);
-    color: #555;
-    margin-bottom: 20px;
-  }
   .event-links {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-top: 16px;
-  }
-  .event-links a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    color: var(--black);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .event-links img { width: 44px; height: 44px; border-radius: 10px; }
-  .event-links span { font-family: 'Cormorant Garamond', serif; font-size: 10px; color: var(--gray); letter-spacing: 0.05em; }
-
- 
-  .countdown-section {
-    padding: 40px 24px 56px;
-    background: var(--white);
-    text-align: center;
-  }
-  .countdown-label {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(15px, 4vw, 20px);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-    font-weight: 700;
-  }
-  .countdown-grid {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  .countdown-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-  .countdown-box {
-    background: var(--black);
-    color: white;
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(26px, 7vw, 40px);
-    font-weight: 700;
-    min-width: 68px;
-    padding: 10px 6px;
-    border-radius: 4px;
-    letter-spacing: 0.05em;
-    line-height: 1;
-  }
-  .countdown-unit span {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gray);
-  }
-  .countdown-sep {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--black);
-    margin-top: 8px;
+    gap: 22px;
   }
 
-
-  .rsvp-section {
-    padding: 48px 24px 64px;
-    background: var(--cream);
-  }
-  .rsvp-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(20px, 5vw, 28px);
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  .rsvp-section .sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(15px, 4vw, 18px);
-    text-align: center;
-    color: #555;
-    margin-bottom: 32px;
-    line-height: 1.6;
-  }
-  .form-group {
-    margin-bottom: 20px;
-  }
-  .form-group label {
-    display: block;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    letter-spacing: 0.06em;
-    margin-bottom: 8px;
-    color: #333;
-  }
-  .form-group input[type="text"] {
-    width: 100%;
-    border: none;
-    border-bottom: 1.5px solid #bbb;
-    background: transparent;
-    padding: 10px 0;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 17px;
-    color: var(--black);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .form-group input[type="text"]:focus { border-bottom-color: var(--black); }
-  .radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 4px;
-  }
-  .radio-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-  }
-  .radio-option input[type="radio"] { display: none; }
-  .radio-custom {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #bbb;
-    border-radius: 50%;
-    flex-shrink: 0;
-    position: relative;
-    transition: border-color 0.2s;
-  }
-  .radio-option input:checked + .radio-custom {
-    border-color: var(--black);
-  }
-  .radio-option input:checked + .radio-custom::after {
-    content: '';
-    position: absolute;
-    top: 3px; left: 3px;
-    width: 10px; height: 10px;
-    background: var(--black);
-    border-radius: 50%;
-  }
-  .radio-option span {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-  }
-  .submit-btn {
-    width: 100%;
-    padding: 18px;
-    background: var(--black);
-    color: white;
-    border: none;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin-top: 28px;
-    transition: background 0.25s, letter-spacing 0.25s;
-    border-radius: 2px;
-  }
-  .submit-btn:hover { background: #222; letter-spacing: 0.28em; }
-
-  .success-msg {
-    display: none;
-    text-align: center;
-    font-family: 'Great Vibes', cursive;
-    font-size: 28px;
-    margin-top: 20px;
-    color: var(--accent);
+  .countdown-item {
+    min-width: 65px;
   }
 
-
-  .footer {
-    background: var(--white);
-    padding: 56px 24px 40px;
-    text-align: center;
-    border-top: 1px solid rgba(0,0,0,0.07);
+  .final-photo {
+    min-height: 560px;
   }
-  .footer-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 8vw, 44px);
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    margin-bottom: 4px;
-    line-height: 1.1;
-  }
-  .footer-names {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(52px, 14vw, 80px);
-    line-height: 1.1;
-    margin: 8px 0 24px;
-  }
-  .footer-names .amp {
-    font-size: 0.7em;
-    opacity: 0.25;
-    display: block;
-    margin: -10px 0;
-  }
-  .fingerprint {
-    margin: 24px auto 28px;
-    width: 100px;
-    height: 100px;
-    opacity: 0.18;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='35' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='25' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='15' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='6' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    margin-top: 8px;
-  }
-  .social-links a {
-    text-decoration: none;
-    color: var(--black);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 0.1em;
-  }
-  .social-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .social-icon svg { width: 44px; height: 44px; }
-
-  .footer-brand {
-    margin-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: var(--gray);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 0.1em;
-  }
-
-
-  .divider {
-    width: 60px;
-    height: 1px;
-    background: rgba(0,0,0,0.2);
-    margin: 0 auto 40px;
-  }
-
- 
-  @media (max-width: 480px) {
-    .countdown-box { min-width: 58px; font-size: 24px; padding: 8px 4px; }
-    .countdown-sep { font-size: 24px; }
-  }
+}
