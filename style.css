@@ -1,0 +1,639 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #fafaf8;
+    --cream: #f5f2ed;
+    --accent: #8b0000;
+    --gold: #c8a96e;
+    --gray: #888;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-4 { transition-delay: 0.6s; }
+
+ 
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    overflow: hidden;
+    padding-bottom: 60px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.85) 100%);
+    z-index: 1;
+  }
+
+  
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(100%);
+    z-index: 0;
+  }
+
+  .hero-photo-placeholder {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #1a1a1a 0%, #2d2d2d 50%, #111 100%);
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-badge {
+    position: absolute;
+    top: 28px;
+    left: 28px;
+    z-index: 3;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+  }
+
+  .hero-save {
+    position: absolute;
+    top: 28px;
+    left: 28px;
+    z-index: 3;
+    color: white;
+    font-size: clamp(28px, 8vw, 42px);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .hero-save em {
+    font-family: 'Great Vibes', cursive;
+    font-size: 0.7em;
+    font-style: normal;
+    display: block;
+    margin-left: -4px;
+    margin-top: -6px;
+    opacity: 0.85;
+  }
+
+  .hero-save-date {
+    position: absolute;
+    top: 80px;
+    right: 28px;
+    z-index: 3;
+    color: white;
+    font-size: clamp(22px, 6vw, 36px);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: white;
+    padding: 0 24px;
+  }
+
+  .hero-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .hero-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(52px, 14vw, 82px);
+    line-height: 1.05;
+    font-weight: 400;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+
+  .hero-names .ampersand {
+    font-size: 0.65em;
+    opacity: 0.9;
+    display: inline-block;
+    margin: 0 8px;
+  }
+
+  .chevrons {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    animation: bounce 1.8s infinite ease-in-out;
+  }
+  .chevrons svg {
+    width: 24px;
+    height: 14px;
+    fill: none;
+    stroke: rgba(255,255,255,0.7);
+    stroke-width: 2;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(7px); }
+  }
+
+  
+.music-bar {
+    background: var(--cream);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+  .music-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--black);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .music-btn:hover { background: var(--black); }
+  .music-btn:hover svg { stroke: white; fill: white; }
+  .music-btn svg { width: 18px; height: 18px; fill: var(--black); stroke: none; }
+
+  .music-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #aaa;
+    font-weight: 600;
+  }
+
+  .music-spin {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0,0,0,0.2);
+    animation: spin 8s linear infinite paused;
+  }
+  .music-btn.playing .music-spin { animation-play-state: running; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+
+  .section {
+    padding: 56px 24px;
+    background: var(--white);
+  }
+
+  .section-dark {
+    background: var(--black);
+    color: white;
+    padding: 56px 24px;
+  }
+
+  .month-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(54px, 14vw, 80px);
+    text-align: center;
+    margin-bottom: 28px;
+    line-height: 1;
+    color: var(--black);
+  }
+
+  .calendar {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  .calendar th {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+    color: var(--gray);
+    padding: 4px 0 12px;
+    text-align: center;
+    width: 14.28%;
+  }
+  .calendar td {
+    text-align: center;
+    padding: 10px 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--black);
+    cursor: default;
+  }
+  .calendar td.wedding-day {
+    position: relative;
+    font-weight: 600;
+    color: var(--black);
+  }
+  .calendar td.wedding-day::before {
+    content: '♥';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 44px;
+    color: var(--accent);
+    opacity: 0.22;
+    z-index: 0;
+    line-height: 1;
+  }
+  .calendar td.wedding-day span {
+    position: relative;
+    z-index: 1;
+  }
+
+
+  .greeting {
+    padding: 48px 28px 56px;
+    background: var(--white);
+    border-top: 1px solid rgba(0,0,0,0.07);
+  }
+  .greeting h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 5vw, 24px);
+    font-weight: 700;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+
+  }
+  .greeting p {
+    font-size: clamp(16px, 4vw, 19px);
+    line-height: 1.85;
+    text-align: center;
+    color: #222;
+    margin-bottom: 12px;
+  }
+  .greeting .script-line {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(24px, 6vw, 32px);
+    text-align: center;
+    margin-top: 18px;
+    color: var(--black);
+  }
+
+  
+  .event-card {
+    margin: 0 20px 40px;
+    border: 1.5px solid var(--black);
+    border-radius: 4px;
+    padding: 32px 24px;
+    text-align: center;
+    background: white;
+  }
+  .event-icon { font-size: 32px; margin-bottom: 12px; }
+  .event-datetime {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 5vw, 24px);
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .event-address-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 10px;
+    margin-top: 14px;
+  }
+  .event-address {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: 1.5;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .event-restaurant {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(15px, 4vw, 19px);
+    color: #555;
+    margin-bottom: 20px;
+  }
+  .event-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 16px;
+  }
+  .event-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--black);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .event-links img { width: 44px; height: 44px; border-radius: 10px; }
+  .event-links span { font-family: 'Cormorant Garamond', serif; font-size: 10px; color: var(--gray); letter-spacing: 0.05em; }
+
+ 
+  .countdown-section {
+    padding: 40px 24px 56px;
+    background: var(--white);
+    text-align: center;
+  }
+  .countdown-label {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(15px, 4vw, 20px);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    font-weight: 700;
+  }
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .countdown-box {
+    background: var(--black);
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 7vw, 40px);
+    font-weight: 700;
+    min-width: 68px;
+    padding: 10px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+  .countdown-unit span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .countdown-sep {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--black);
+    margin-top: 8px;
+  }
+
+
+  .rsvp-section {
+    padding: 48px 24px 64px;
+    background: var(--cream);
+  }
+  .rsvp-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .rsvp-section .sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(15px, 4vw, 18px);
+    text-align: center;
+    color: #555;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-group label {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  .form-group input[type="text"] {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #bbb;
+    background: transparent;
+    padding: 10px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--black);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input[type="text"]:focus { border-bottom-color: var(--black); }
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .radio-option input[type="radio"] { display: none; }
+  .radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #bbb;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .radio-option input:checked + .radio-custom {
+    border-color: var(--black);
+  }
+  .radio-option input:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 10px; height: 10px;
+    background: var(--black);
+    border-radius: 50%;
+  }
+  .radio-option span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+  }
+  .submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: var(--black);
+    color: white;
+    border: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 28px;
+    transition: background 0.25s, letter-spacing 0.25s;
+    border-radius: 2px;
+  }
+  .submit-btn:hover { background: #222; letter-spacing: 0.28em; }
+
+  .success-msg {
+    display: none;
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 28px;
+    margin-top: 20px;
+    color: var(--accent);
+  }
+
+
+  .footer {
+    background: var(--white);
+    padding: 56px 24px 40px;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.07);
+  }
+  .footer-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 8vw, 44px);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+    line-height: 1.1;
+  }
+  .footer-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(52px, 14vw, 80px);
+    line-height: 1.1;
+    margin: 8px 0 24px;
+  }
+  .footer-names .amp {
+    font-size: 0.7em;
+    opacity: 0.25;
+    display: block;
+    margin: -10px 0;
+  }
+  .fingerprint {
+    margin: 24px auto 28px;
+    width: 100px;
+    height: 100px;
+    opacity: 0.18;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='35' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='25' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='15' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='6' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 8px;
+  }
+  .social-links a {
+    text-decoration: none;
+    color: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+  .social-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .social-icon svg { width: 44px; height: 44px; }
+
+  .footer-brand {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--gray);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(0,0,0,0.2);
+    margin: 0 auto 40px;
+  }
+
+ 
+  @media (max-width: 480px) {
+    .countdown-box { min-width: 58px; font-size: 24px; padding: 8px 4px; }
+    .countdown-sep { font-size: 24px; }
+  }
